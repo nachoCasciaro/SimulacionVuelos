@@ -608,7 +608,7 @@ namespace SimulacionVuelos
             Random r = new Random();
             double R = r.NextDouble();
             //Cambiar esto
-            return 203074 * R + ;
+            return Convert.ToInt32(203074 * R);
         }
 
         public static double generarPSPS()
