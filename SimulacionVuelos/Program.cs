@@ -18,7 +18,7 @@ namespace SimulacionVuelos
             int CLL = 0;
             int TR = 0;
             int RAR = 0;
-            int TMAX = 232190;
+            int TMAX = 232190; //REVISAR TMAX ESTA INVENTADO
             int SC = 0;
             int ARRNC = 0;
             int ARRNE = 0;
@@ -139,7 +139,7 @@ namespace SimulacionVuelos
         {
             int asiento = BuscarAsientoLibreEnEjecutiva(asientos);
 
-            if (asiento == 0)
+            if (asiento == -1)
             {
                 //No encontro en Primera busco en ejecutiva o turista
                 asiento = BuscarAsientoLibreEnEjecutivaOTurista(asientos);
@@ -151,8 +151,7 @@ namespace SimulacionVuelos
                 if (R <= 0.8)
                 {
                     //Generar PSCI 
-                    int PSCI = 60; //TODO Cambiar FDP
-                    SC += PSCI;
+                    SC += generarPSPI();
                 }
                 else
                 {
@@ -173,17 +172,17 @@ namespace SimulacionVuelos
         {
             int asiento = BuscarAsientoLibreEnEjecutiva(asientos);
 
-            if (asiento == 0)
+            if (asiento == -1)
             {
                 //No encontro en Ejecutiva busco en Primera
                 asiento = BuscarAsientoLibreEnPrimera(asientos);
 
-                if (asiento == 0)
+                if (asiento == -1)
                 {
                     //Si no encuentra en primera, busco en turista
                     asiento = BuscarAsientoLibreEnETurista(asientos);
 
-                    if (asiento == 0)
+                    if (asiento == -1)
                     {
                         // No hay asiento de turista
                         ARRNC++;
@@ -201,8 +200,7 @@ namespace SimulacionVuelos
                         else
                         {
                             // Acepta asiento en turista
-                            int PSCI2 = 55; //TODO GENERAR FDP
-                            SC += PSCI2;
+                            SC += generarPSPI();
                         }
                     }
                 }
@@ -217,7 +215,7 @@ namespace SimulacionVuelos
                     {
                         asiento = BuscarAsientoLibreEnETurista(asientos);
 
-                        if (asiento == 0)
+                        if (asiento == -1)
                         {
                             //No encuentra en turista
                             ARRNC++;
@@ -235,16 +233,14 @@ namespace SimulacionVuelos
                             else
                             {
                                 //Acepta clase inferior
-                                int PSCI = 55; //TODO GENERAR FDP
-                                SC += PSCI;
+                                SC += generarPSPI();
 
                             }
                         }
                     }
                     else
                     {
-                        int PSCS = 55; //TODO GENERAR FDP
-                        SC += PSCS;
+                        SC += generarPSPS();
                     }
                 }
 
@@ -255,8 +251,7 @@ namespace SimulacionVuelos
                 if (R <= 80)
                 {
                     //Generar PSCI 
-                    int PSCI = 60; //TODO Cambiar FDP
-                    SC += PSCI;
+                    SC += generarPSPI();
                 }
                 else
                 {
@@ -277,7 +272,7 @@ namespace SimulacionVuelos
         {
             int asiento = BuscarAsientoLibreEnETurista(asientos);
 
-            if (asiento == 0)
+            if (asiento == -1)
             {
                 //No encontro en Turista busco en ejecutiva o primera
                 asiento = BuscarAsientoLibreEnPrimeraOEjecutiva(asientos);
@@ -286,11 +281,10 @@ namespace SimulacionVuelos
                 Random r = new Random();
                 double R = r.NextDouble();
 
-                if (R <= 0.7)
+                if (R <= 0.7) //REVISAR 
                 {
                     //Generar PSCS
-                    int PSCS = 60; //TODO Cambiar FDP
-                    SC += PSCS;
+                    SC += generarPSPS();
                 }
                 else
                 {
@@ -317,7 +311,7 @@ namespace SimulacionVuelos
                 }
             }
 
-            return 0;
+            return -1;
         }
 
         public static int BuscarAsientoLibreEnEjecutivaOTurista(List<int> asientos)
@@ -330,7 +324,7 @@ namespace SimulacionVuelos
                 }
             }
 
-            return 0;
+            return -1;
         }
 
         public static int BuscarAsientoLibreEnEjecutiva(List<int> asientos)
@@ -343,7 +337,7 @@ namespace SimulacionVuelos
                 }
             }
 
-            return 0;
+            return -1;
         }
 
         public static int BuscarAsientoLibreEnETurista(List<int> asientos)
@@ -356,7 +350,7 @@ namespace SimulacionVuelos
                 }
             }
 
-            return 0;
+            return -1;
         }
 
         public static int BuscarAsientoLibreEnPrimeraOEjecutiva(List<int> asientos)
@@ -369,7 +363,7 @@ namespace SimulacionVuelos
                 }
             }
 
-            return 0;
+            return -1;
         }
 
 
@@ -428,17 +422,17 @@ namespace SimulacionVuelos
             double R2 = r.NextDouble();
             double R3 = r.NextDouble();
 
-            if (R1 < 0.5)
+            if (R1 < 0.5) //REVISAR 
             {
                 CESC++;
                 TCEC++;
             }
-            else if (R2 < 0.7)
+            else if (R2 < 0.7) //REVISAR 
             {
                 CE3++;
                 TCE3++;
             }
-            else if (R3 < 0.85)
+            else if (R3 < 0.85) //REVISAR 
             {
                 CE2++;
                 TCE2++;
@@ -477,10 +471,10 @@ namespace SimulacionVuelos
             double R3 = r.NextDouble();
 
             //El 60% desea un asiento de primera
-            if (R < 0.6)
+            if (R < 0.6) //REVISAR 
             {
                 // Me fijo si el asiento liberado es de primera
-                if (I >= 0 && I <= 7)
+                if (I >= 0 && I <= 7) //REVISAR  
                 {
                     // El asiento liberado es el que preferia el cliente
                     SC += 90;
@@ -490,7 +484,7 @@ namespace SimulacionVuelos
                     // El asiento liberado no es de primera, es una clase inferior
                     // El 80% acepta una clase inferior, el resto se arrepiente
                     double R2 = r.NextDouble();
-                    if (R2 < 0.8)
+                    if (R2 < 0.8) //REVISAR 
                     {
                         SC += 80;
                     }
@@ -502,7 +496,7 @@ namespace SimulacionVuelos
 
                 //El 70% desea un asiento de ejecutiva REVEER LOS PORCENTAJES
             }
-            else if (R3 < 0.7)
+            else if (R3 < 0.7) //REVISAR  
             {
                 // Me fijo si el asiento liberado es de ejecutiva
                 if (I >= 8 && I <= 29)
@@ -529,7 +523,7 @@ namespace SimulacionVuelos
                 {
                     // El 70% acepta una clase superior resto se arrepiente
                     double R2 = r.NextDouble();
-                    if (R2 < 0.7)
+                    if (R2 < 0.7) //REVISAR 
                     {
                         SC += 80;
                     }
@@ -553,7 +547,7 @@ namespace SimulacionVuelos
                 {
                     // El 70% acepta una clase superior resto se arrepiente
                     double R2 = r.NextDouble();
-                    if (R2 < 0.7)
+                    if (R2 < 0.7) //REVISAR 
                     {
                         SC += 80;
                     }
@@ -611,18 +605,18 @@ namespace SimulacionVuelos
             return Convert.ToInt32(203074 * R + 29116);
         }
 
-        public static double generarPSPS()
+        public static int generarPSPS()
         {
             Random r = new Random();
             double R = r.NextDouble();
-            return 21 * R + 63;
+            return Convert.ToInt32( 21 * R + 63);
         }
 
-        public static double generarPSPI()
+        public static int generarPSPI()
         {
             Random r = new Random();
             double R = r.NextDouble();
-            return 20 * R + 5;
+            return Convert.ToInt32(16 * R + 57);
         }
     }
 
