@@ -18,7 +18,7 @@ namespace SimulacionVuelos
             int CLL = 0;
             int TR = 0;
             int RAR = 0;
-            int TMAX = 4000;
+            int TMAX = 232190;
             int SC = 0;
             int ARRNC = 0;
             int ARRNE = 0;
@@ -608,7 +608,7 @@ namespace SimulacionVuelos
             Random r = new Random();
             double R = r.NextDouble();
             //Cambiar esto
-            return Convert.ToInt32(203074 * R);
+            return Convert.ToInt32(203074 * R + 29116);
         }
 
         public static double generarPSPS()
