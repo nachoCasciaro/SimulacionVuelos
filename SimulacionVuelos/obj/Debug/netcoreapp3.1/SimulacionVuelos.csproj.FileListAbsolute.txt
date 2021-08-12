@@ -1,0 +1,26 @@
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.exe
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.deps.json
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.runtimeconfig.json
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.runtimeconfig.dev.json
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.dll
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.pdb
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.csprojAssemblyReference.cache
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.AssemblyInfoInputs.cache
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.AssemblyInfo.cs
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.csproj.CoreCompileInputs.cache
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.dll
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.pdb
+C:\Users\JB995MY\source\repos\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.genruntimeconfig.cache
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.csprojAssemblyReference.cache
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.AssemblyInfoInputs.cache
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.AssemblyInfo.cs
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.csproj.CoreCompileInputs.cache
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.dll
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.pdb
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.exe
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.deps.json
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.runtimeconfig.json
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.runtimeconfig.dev.json
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.dll
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\bin\Debug\netcoreapp3.1\SimulacionVuelos.pdb
+C:\Users\JB995MY\OneDrive - EY\Desktop\SimulacionVuelos\SimulacionVuelos\obj\Debug\netcoreapp3.1\SimulacionVuelos.genruntimeconfig.cache
