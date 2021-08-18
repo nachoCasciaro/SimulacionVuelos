@@ -52,12 +52,12 @@ namespace SimulacionVuelos
                         double R = r.NextDouble();
 
                         int asientoAComprarOReservar;
-                        if (R <= 0.6)
+                        if (R <= 0.05)
                         {
                             //Me fijo en primera
                             asientoAComprarOReservar = ReservarAsientoEnPrimeraOResto(DA, ref SC, ref ARRNC);
                         }
-                        else if (R <= 0.7)
+                        else if (R <= 0.15)
                         {
                             //Me fijo en ejecutiva
                             asientoAComprarOReservar = ReservarAsientoEnEjecutivaOResto(DA, ref SC, ref ARRNC);
@@ -68,7 +68,9 @@ namespace SimulacionVuelos
                             asientoAComprarOReservar = ReservarAsientoEnTuristaOResto(DA, ref SC, ref ARRNC);
                         }
 
-                        CompraOReserva(ref TPD, ref DA, ref TR, asientoAComprarOReservar, ref RAR, TMAX, T);
+                        // Puede pasar que el cliente no quiere ningun asiento inferior o superior ofrecido entonces la funcion Reservar devuelve -1
+                        if (asientoAComprarOReservar != -1)
+                            CompraOReserva(ref TPD, ref DA, ref TR, asientoAComprarOReservar, ref RAR, TMAX, T);
                     }
                     else
                     {
@@ -77,6 +79,7 @@ namespace SimulacionVuelos
                     }
                 }
                 else
+                
                 {
                     //Rama definicion de asiento
                     T = TPD.ElementAt(I);
@@ -86,6 +89,7 @@ namespace SimulacionVuelos
                     if (r2 < 0.7)
                     {
                         DA[I] = 1;
+                        TPD[I] = 999999999; // Poner el TPD en HV asi no vuelve a entrar por el mismo I
                     }
                     else
                     {
@@ -609,7 +613,7 @@ namespace SimulacionVuelos
         {
             Random r = new Random();
             double R = r.NextDouble();
-            return Convert.ToInt32( 21 * R + 63);
+            return Convert.ToInt32(21 * R + 63);
         }
 
         public static int generarPSPI()
