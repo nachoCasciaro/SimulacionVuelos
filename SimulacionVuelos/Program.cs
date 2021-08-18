@@ -10,7 +10,7 @@ namespace SimulacionVuelos
         {
             int T = 0;
             int TPLL = 0;
-            int TF = 1000000;
+            int TF = 1000000000;
             List<int> DA = new List<int>();
             List<int> TPD = new List<int>();
             int IA;
@@ -591,6 +591,7 @@ namespace SimulacionVuelos
             Console.WriteLine("El PARRNE es: " + PARRNE);
             Console.WriteLine("El PARRNC es: " + PARRNC);
             Console.WriteLine("El PRRA es: " + PRRA);
+
         }
 
 
@@ -598,7 +599,7 @@ namespace SimulacionVuelos
         {
             Random r = new Random();
             double R = r.NextDouble();
-            return Convert.ToInt32(Math.Log(-R + 1) / (-0.0046));
+            return Convert.ToInt32(Math.Log(-R + 1) / (-0.0046)) * 60;
         }
 
         public static int generarDE()
@@ -606,7 +607,7 @@ namespace SimulacionVuelos
             Random r = new Random();
             double R = r.NextDouble();
             //Cambiar esto
-            return Convert.ToInt32(203074 * R + 29116);
+            return Convert.ToInt32(203074 * R + 29116) / 60;
         }
 
         public static int generarPSPS()
