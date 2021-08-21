@@ -70,7 +70,11 @@ namespace SimulacionVuelos
 
                         // Puede pasar que el cliente no quiere ningun asiento inferior o superior ofrecido entonces la funcion Reservar devuelve -1
                         if (asientoAComprarOReservar != -1)
+                        {
+                            // Cuento solo los que no se arrepintieron
+                            CLL++;
                             CompraOReserva(ref TPD, ref DA, ref TR, asientoAComprarOReservar, ref RAR, TMAX, T);
+                        }
                     }
                     else
                     {
@@ -141,7 +145,7 @@ namespace SimulacionVuelos
 
         public static int ReservarAsientoEnPrimeraOResto(List<int> asientos, ref int SC, ref int ARRNC)
         {
-            int asiento = BuscarAsientoLibreEnEjecutiva(asientos);
+            int asiento = BuscarAsientoLibreEnPrimera(asientos);
 
             if (asiento == -1)
             {
@@ -188,8 +192,8 @@ namespace SimulacionVuelos
 
                     if (asiento == -1)
                     {
-                        // No hay asiento de turista
-                        ARRNC++;
+                        // No puede pasar nunca que llegue hasta aca
+                        // Hay un if antes HayAsientosLibres, por lo que en alguna clase tiene que haber un asiento libre
                     }
                     else
                     {
@@ -285,7 +289,7 @@ namespace SimulacionVuelos
                 Random r = new Random();
                 double R = r.NextDouble();
 
-                if (R <= 0.7) //REVISAR 
+                if (R <= 0.7)
                 {
                     //Generar PSCS
                     SC += generarPSPS();
@@ -474,11 +478,11 @@ namespace SimulacionVuelos
             double R = r.NextDouble();
             double R3 = r.NextDouble();
 
-            //El 60% desea un asiento de primera
-            if (R < 0.6) //REVISAR 
+            //El 5% desea un asiento de primera
+            if (R < 0.05) 
             {
                 // Me fijo si el asiento liberado es de primera
-                if (I >= 0 && I <= 7) //REVISAR  
+                if (I >= 0 && I <= 7)
                 {
                     // El asiento liberado es el que preferia el cliente
                     SC += 90;
@@ -488,7 +492,7 @@ namespace SimulacionVuelos
                     // El asiento liberado no es de primera, es una clase inferior
                     // El 80% acepta una clase inferior, el resto se arrepiente
                     double R2 = r.NextDouble();
-                    if (R2 < 0.8) //REVISAR 
+                    if (R2 < 0.8)
                     {
                         SC += 80;
                     }
@@ -498,9 +502,9 @@ namespace SimulacionVuelos
                     }
                 }
 
-                //El 70% desea un asiento de ejecutiva REVEER LOS PORCENTAJES
+                //El 15% desea un asiento de ejecutiva REVEER LOS PORCENTAJES
             }
-            else if (R3 < 0.7) //REVISAR  
+            else if (R3 < 0.15)  
             {
                 // Me fijo si el asiento liberado es de ejecutiva
                 if (I >= 8 && I <= 29)
