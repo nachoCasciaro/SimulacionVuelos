@@ -48,7 +48,6 @@ namespace SimulacionVuelos
                     if (HayAsientosLibres(DA))
                     {
                         //Compra o reserva
-                        CLL++;
                         double R = r.NextDouble();
 
                         int asientoAComprarOReservar;
