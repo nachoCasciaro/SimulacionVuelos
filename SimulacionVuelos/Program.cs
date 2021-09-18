@@ -325,7 +325,7 @@ namespace SimulacionVuelos
 
         public static int BuscarAsientoLibreEnEjecutivaOTurista(List<int> asientos)
         {
-            for (int i = 8*2; i < 150; i++)
+            for (int i = 8; i < 150; i++)
             {
                 if (asientos.ElementAt(i) == 0)
                 {
@@ -338,7 +338,7 @@ namespace SimulacionVuelos
 
         public static int BuscarAsientoLibreEnEjecutiva(List<int> asientos)
         {
-            for (int i = 8*2; i < 30; i++)
+            for (int i = 8; i < 30; i++)
             {
                 if (asientos.ElementAt(i) == 0)
                 {
@@ -351,7 +351,7 @@ namespace SimulacionVuelos
 
         public static int BuscarAsientoLibreEnETurista(List<int> asientos)
         {
-            for (int i = 30*2; i < 150; i++)
+            for (int i = 30; i < 150; i++)
             {
                 if (asientos.ElementAt(i) == 0)
                 {
