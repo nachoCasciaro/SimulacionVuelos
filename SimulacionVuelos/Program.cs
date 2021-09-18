@@ -10,7 +10,7 @@ namespace SimulacionVuelos
         {
             int T = 0;
             int TPLL = 0;
-            int TF = 1000000000;
+            int TF = 1000000;
             List<int> DA = new List<int>();
             List<int> TPD = new List<int>();
             int IA;
@@ -18,7 +18,7 @@ namespace SimulacionVuelos
             int CLL = 0;
             int TR = 0;
             int RAR = 0;
-            int TMAX = 232190; //REVISAR TMAX ESTA INVENTADO
+            int TMAX = 2160; //REVISAR TMAX ESTA INVENTADO
             int SC = 0;
             int ARRNC = 0;
             int ARRNE = 0;
@@ -78,11 +78,11 @@ namespace SimulacionVuelos
                     else
                     {
                         //COla de espera
-                        ColaDeEsperaOArrepentido(ref CLL, ref ARRNE, ref CESC, ref CE3, ref CE2, ref CE1, ref TCEC, ref TCE3, ref TCE2, ref TCE1);
+                        if (DA.Any(x => x != 1))
+                            ColaDeEsperaOArrepentido(ref CLL, ref ARRNE, ref CESC, ref CE3, ref CE2, ref CE1, ref TCEC, ref TCE3, ref TCE2, ref TCE1);
                     }
                 }
-                else
-                
+                else if (DA.ElementAt(I) != 1)
                 {
                     //Rama definicion de asiento
                     T = TPD.ElementAt(I);
@@ -92,7 +92,7 @@ namespace SimulacionVuelos
                     if (r2 < 0.7)
                     {
                         DA[I] = 1;
-                        TPD[I] = 999999999; // Poner el TPD en HV asi no vuelve a entrar por el mismo I
+                        TPD[I] = int.MaxValue; // Poner el TPD en HV asi no vuelve a entrar por el mismo I
                     }
                     else
                     {
@@ -101,13 +101,15 @@ namespace SimulacionVuelos
                         {
                             ElegirPersonaDeLaColaDeEsperaPorPrioridad(ref CESC, ref CE3, ref CE2, ref CE1);
 
-                            PreguntarSiElAsientoLiberadoEsElAdecuado(I, ref SC, ref ARRNC);
+                            var esElAdecuado = PreguntarSiElAsientoLiberadoEsElAdecuado(I, ref SC, ref ARRNC);
 
-                            CompraOReserva(ref TPD, ref DA, ref TR, I, ref RAR, TMAX, T);
+                            if (esElAdecuado)
+                                CompraOReserva(ref TPD, ref DA, ref TR, I, ref RAR, TMAX, T);
                         }
                     }
 
                 }
+
 
                 Console.WriteLine(T);
             } while (T < TF);
@@ -213,12 +215,12 @@ namespace SimulacionVuelos
                 }
                 else
                 {
-                    //Si encuentra en primera, el 70% acepta, el resto pregunto si quiere turista
+                    //Si encuentra en primera, el 20% acepta, el resto pregunto si quiere turista
 
                     Random r2 = new Random();
                     double R2 = r2.NextDouble();
 
-                    if (R2 <= 0.3)
+                    if (R2 <= 0.8)
                     {
                         asiento = BuscarAsientoLibreEnETurista(asientos);
 
@@ -251,19 +253,19 @@ namespace SimulacionVuelos
                     }
                 }
 
-                // El 80% acepta la clase inferior, el resto se arrepiente
-                Random r = new Random();
-                double R = r.NextDouble();
+                //// El 80% acepta la clase inferior, el resto se arrepiente
+                //Random r = new Random();
+                //double R = r.NextDouble();
 
-                if (R <= 80)
-                {
-                    //Generar PSCI 
-                    SC += generarPSPI();
-                }
-                else
-                {
-                    ARRNC++;
-                }
+                //if (R <= 80)
+                //{
+                //    //Generar PSCI 
+                //    SC += generarPSPI();
+                //}
+                //else
+                //{
+                //    ARRNC++;
+                //}
             }
             else
             {
@@ -284,11 +286,11 @@ namespace SimulacionVuelos
                 //No encontro en Turista busco en ejecutiva o primera
                 asiento = BuscarAsientoLibreEnPrimeraOEjecutiva(asientos);
 
-                // El 80% acepta la clase superior, el resto se arrepiente
+                // El 40% acepta la clase superior, el resto se arrepiente
                 Random r = new Random();
                 double R = r.NextDouble();
 
-                if (R <= 0.7)
+                if (R <= 0.4)
                 {
                     //Generar PSCS
                     SC += generarPSPS();
@@ -323,7 +325,7 @@ namespace SimulacionVuelos
 
         public static int BuscarAsientoLibreEnEjecutivaOTurista(List<int> asientos)
         {
-            for (int i = 8; i < 150; i++)
+            for (int i = 8*2; i < 150; i++)
             {
                 if (asientos.ElementAt(i) == 0)
                 {
@@ -336,7 +338,7 @@ namespace SimulacionVuelos
 
         public static int BuscarAsientoLibreEnEjecutiva(List<int> asientos)
         {
-            for (int i = 8; i < 30; i++)
+            for (int i = 8*2; i < 30; i++)
             {
                 if (asientos.ElementAt(i) == 0)
                 {
@@ -349,7 +351,7 @@ namespace SimulacionVuelos
 
         public static int BuscarAsientoLibreEnETurista(List<int> asientos)
         {
-            for (int i = 30; i < 150; i++)
+            for (int i = 30*2; i < 150; i++)
             {
                 if (asientos.ElementAt(i) == 0)
                 {
@@ -386,7 +388,7 @@ namespace SimulacionVuelos
                 da[I] = 2;
                 int DE = generarDE();
 
-                if (DE < TMAX)
+                if (DE < TMAX * 60)
                 {
                     tpds[I] = T + DE;
                 }
@@ -399,6 +401,7 @@ namespace SimulacionVuelos
             else
             {
                 da[I] = 1;
+                tpds[I] = int.MaxValue;
             }
 
         }
@@ -439,7 +442,7 @@ namespace SimulacionVuelos
                 CE3++;
                 TCE3++;
             }
-            else if (R3 < 0.85) //REVISAR 
+            else if (R3 < 0.95) //REVISAR 
             {
                 CE2++;
                 TCE2++;
@@ -471,14 +474,14 @@ namespace SimulacionVuelos
             }
         }
 
-        public static void PreguntarSiElAsientoLiberadoEsElAdecuado(int I, ref int SC, ref int ARRNC)
+        public static bool PreguntarSiElAsientoLiberadoEsElAdecuado(int I, ref int SC, ref int ARRNC)
         {
             Random r = new Random();
             double R = r.NextDouble();
             double R3 = r.NextDouble();
 
             //El 5% desea un asiento de primera
-            if (R < 0.05) 
+            if (R < 0.05)
             {
                 // Me fijo si el asiento liberado es de primera
                 if (I >= 0 && I <= 7)
@@ -498,12 +501,13 @@ namespace SimulacionVuelos
                     else
                     {
                         ARRNC++;
+                        return false;
                     }
                 }
 
                 //El 15% desea un asiento de ejecutiva REVEER LOS PORCENTAJES
             }
-            else if (R3 < 0.15)  
+            else if (R3 < 0.15)
             {
                 // Me fijo si el asiento liberado es de ejecutiva
                 if (I >= 8 && I <= 29)
@@ -523,6 +527,7 @@ namespace SimulacionVuelos
                     else
                     {
                         ARRNC++;
+                        return false;
                     }
                 }
                 // El asiento liberado es de primera
@@ -537,6 +542,7 @@ namespace SimulacionVuelos
                     else
                     {
                         ARRNC++;
+                        return false;
                     }
                 }
 
@@ -561,9 +567,12 @@ namespace SimulacionVuelos
                     else
                     {
                         ARRNC++;
+                        return false;
                     }
                 }
             }
+
+            return true;
         }
 
         public static void CalcularResultados(int SC, int CLL, int ARRNC, int ARRNE, int CESC, int CE1, int CE2, int CE3, int TCEC, int TCE3, int TCE2, int TCE1, int RAR, int TR)
@@ -577,7 +586,7 @@ namespace SimulacionVuelos
             int PARRNC;
             int PRRA;
 
-            PS = SC / CLL;
+            PS = SC / (CLL);
             PCE1 = CE1 * 100 / TCE1;
             PCE2 = CE2 * 100 / TCE2;
             PCE3 = CE3 * 100 / TCE3;
@@ -594,7 +603,6 @@ namespace SimulacionVuelos
             Console.WriteLine("El PARRNE es: " + PARRNE);
             Console.WriteLine("El PARRNC es: " + PARRNC);
             Console.WriteLine("El PRRA es: " + PRRA);
-
         }
 
 
@@ -602,7 +610,7 @@ namespace SimulacionVuelos
         {
             Random r = new Random();
             double R = r.NextDouble();
-            return Convert.ToInt32(Math.Log(-R + 1) / (-0.0046)) * 60;
+            return Convert.ToInt32(Math.Log(-R + 1) / (-0.0046)) * 5;
         }
 
         public static int generarDE()
@@ -610,7 +618,7 @@ namespace SimulacionVuelos
             Random r = new Random();
             double R = r.NextDouble();
             //Cambiar esto
-            return Convert.ToInt32(203074 * R + 29116) / 60;
+            return Convert.ToInt32(203074 * R + 29116);
         }
 
         public static int generarPSPS()
